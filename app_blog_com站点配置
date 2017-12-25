@@ -14,3 +14,16 @@ apache配置
 		Require all granted
 	</Directory>
 </VirtualHost>
+
+
+
+server {
+    listen       80;
+    server_name  app.blog.com;
+    root   D:\phpStudy\WWW\blog\blog-angular\dist;
+    access_log  D:/phpStudy/log/app.blog.com/access.log;
+    error_log   D:/phpStudy/log/app.blog.com/error.log;
+    index  index.html index.htm;
+    try_files $uri$args $uri$args/ $uri $uri/ /index.html =404;
+   
+}
