@@ -1,0 +1,29 @@
+apache配置
+#api.blog.com
+<VirtualHost *:80>
+   ServerAdmin darkgel@dev.com
+   DocumentRoot "E:/data/web/blog/blog-php/api/web"
+   ServerName api.blog.com
+   ServerAlias api.blog.com
+   ErrorLog "logs/api_blog_com-error.log"
+   CustomLog "logs/api_blog_com-access.log" combined
+	<Directory "E:/data/web/blog/blog-php/api/web">
+	    # use mod_rewrite for pretty URL support
+	    RewriteEngine on
+	    # If a directory or a file exists, use the request directly
+	    RewriteCond %{REQUEST_FILENAME} !-f
+	    RewriteCond %{REQUEST_FILENAME} !-d
+	    # Otherwise forward the request to index.php
+	    RewriteRule . index.php
+
+	    # if $showScriptName is false in UrlManager, do not allow accessing URLs with script name
+	    RewriteRule ^index.php/ - [L,R=404]
+
+	    # ...other settings...
+	    Options -Indexes +FollowSymLinks +ExecCGI
+	    AllowOverride All
+	    Order Allow,Deny
+	    Allow from all
+		Require all granted
+	</Directory>
+</VirtualHost>

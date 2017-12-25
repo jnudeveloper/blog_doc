@@ -1,0 +1,16 @@
+apache配置
+#app.blog.com
+<VirtualHost *:80>
+	ServerAdmin darkgel@dev.com
+	DocumentRoot "E:/data/web/blog/blog-angular/dist"
+	ServerName app.blog.com
+	ErrorLog "logs/app_blog_com-error.log"
+	CustomLog "logs/app_blog_com-access.log" combined
+	<Directory "E:/data/web/blog/blog-angular/dist">
+		Options -Indexes +FollowSymLinks +ExecCGI
+		AllowOverride All
+		Order Allow,Deny
+		Allow from all
+		Require all granted
+	</Directory>
+</VirtualHost>
