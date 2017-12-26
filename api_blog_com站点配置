@@ -1,3 +1,9 @@
+安装流程：  
+1.使用git clone 拉取代码  
+2.在composer.json所在目录下执行命令 “composer install”
+3.在‘blog-php’目录下执行命令“php init”,选择初始化为“dev”环境
+
+
 apache配置
 #api.blog.com
 <VirtualHost *:80>

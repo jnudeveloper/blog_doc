@@ -1,3 +1,9 @@
+1.使用git clone下载代码
+2.使用命令"npm install"安装依赖
+3.使用命令"ng build"发布源代码
+
+注意：请自行安装angular cli等环境
+
 apache配置
 #app.blog.com
 <VirtualHost *:80>
@@ -16,7 +22,7 @@ apache配置
 </VirtualHost>
 
 
-
+nginx配置
 server {
     listen       80;
     server_name  app.blog.com;
