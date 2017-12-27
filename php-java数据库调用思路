@@ -1,0 +1,22 @@
+
+需要重写的方法
+ActiveRecord：
+public static function getDb()
+public static function updateAll($attributes, $condition = '', $params = [])
+public static function updateAllCounters($counters, $condition = '', $params = [])
+public static function deleteAll($condition = null, $params = [])
+public static function getTableSchema()
+public static function populateRecord($record, $row)
+public function insert($runValidation = true, $attributes = null)
+protected function insertInternal($attributes = null)
+public function update($runValidation = true, $attributeNames = null)
+public function delete()
+protected function deleteInternal()
+public function isTransactional($operation)
+
+
+yii\db\Command
+public function prepare($forRead = null)
+public function bindParam($name, &$value, $dataType = null, $length = null, $driverOptions = null)
+public function queryScalar()
+public function execute()
