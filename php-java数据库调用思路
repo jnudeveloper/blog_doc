@@ -20,3 +20,10 @@ public function prepare($forRead = null)
 public function bindParam($name, &$value, $dataType = null, $length = null, $driverOptions = null)
 public function queryScalar()
 public function execute()
+
+
+需要的返回值
+	字段：
+	主键：
+	relatedRecord
+	db（貌似不需要）
