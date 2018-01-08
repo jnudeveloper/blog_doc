@@ -1,0 +1,87 @@
+http://www.jooq.org/download/
+http://www.querydsl.com/
+https://examples.javacodegeeks.com/core-java/sql/jdbc-query-builder-tutorial/
+
+
+
+两种可能的形式
+ * - hash format: `['column1' => value1, 'column2' => value2, ...]`
+ * - operator format: `[operator, operand1, operand2, ...]`
+
+ 1.hash format: `['column1' => value1, 'column2' => value2, ...]`
+ 	In case when a value is an array,an `IN` expression will be generated.
+ 	And if a value is `null`, `IS NULL` will be used in the generated expression.
+
+ 2.operator format: `[operator, operand1, operand2, ...]`
+ 	`['and', 'id=1', 'id=2']` => `id=1 AND id=2`
+ 	If an operand is an array,it will be converted into a string using the rules described here.(即可递归`['and', 'type=1', ['or', 'id=1', 'id=2']]` will generate `type=1 AND (id=1 OR id=2)`.)
+
+ 	`['or', ['type' => [7, 8, 9]], ['id' => [1, 2, 3]]]` => `(type IN (7, 8, 9) OR (id IN (1, 2, 3)))`.
+
+ 	`['not', ['attribute' => null]]` => `NOT (attribute IS NULL)`.
+
+ 	`['between', 'id', 1, 10]` => `id BETWEEN 1 AND 10`
+
+ 	`['not between', 'id', 1, 10]` => `id NOT BETWEEN 1 AND 10`
+
+ 	`['in', 'id', [1, 2, 3]]` => `id IN (1, 2, 3)`.
+
+ 	`['in', ['id', 'name'], [['id' => 1, 'name' => 'foo'], ['id' => 2, 'name' => 'bar']] ]`(not in类似)
+
+ 	`['like', 'name', 'tester']` => `name LIKE '%tester%'`
+
+ 	`['like', 'name', ['test', 'sample']]`  => `name LIKE '%test%' AND name LIKE '%sample%'`(or like,not like, or not like 类似)
+
+ 	`['exists', (new Query())->select('id')->from('users')->where(['active' => 1])]`  => `EXISTS (SELECT "id" FROM "users" WHERE "active"=1)`（not exists类似）
+
+ 	其他 ：'>=','<=','!=','>','<'
+
+修改：
+1.改where为string，为json处理后的字符串
+2.改order为map（可能其他也需要改为map）
+
+
+Query结构：
+	1.where ：json字符串
+	2.limit ：int（为Expression的情况暂不考虑），未设置或小于0代表不限制
+	3.offset ：int(为Expression的情况暂不考虑)，If not set or less than 0, it means starting from the beginning.
+	4.orderBy ：map ['id' => 'ASC', 'score' => 'DESC']
+	5.select : list<String>，未设置代表“*”
+	6.selectOption: String (additional option that should be appended to the 'SELECT' keyword. For example,in MySQL, the option 'SQL_CALC_FOUND_ROWS' can be used.)
+	7.distinct : bool (If this is set true,the SELECT clause would be changed to SELECT DISTINCT.)
+	8.from : list<String>
+	9.groupBy : list<String>(For example, `['company', 'department']`)
+	10.join : json字符串（ [$joinType, $tableName, $joinCondition]）
+		例子：
+		[
+			['INNER JOIN', 'user', 'user.id = author_id'],
+			['LEFT JOIN', 'team', 'team.id = team_id'],
+		]
+	11.having ：json字符串（参考where）
+	12.union : json字符串
+		[
+			'query' => 对应一个query，
+			'all' => boolean, whether it should be `UNION ALL` or `UNION`
+		]
+	13.params : map (`[':name' => 'Dan', ':age' => 31]`)
+
+
+
+
+
+
+基础db service(yii\db\Query)
+	db():设置查询的db
+	all():查询所有记录
+	one():查询一条记录
+	scalar():The value returned will be the first column in the first row of the query results.
+	column():Executes the query and returns the first column of the result.
+	count()：Returns the number of records.
+	sum(): Returns the sum of the specified column values.
+	average(): Returns the average of the specified column values.
+	min(): Returns the minimum of the specified column values.
+	max(): Returns the minimum of the specified column values.
+	exists(): Returns a value indicating whether the query result contains any row of data.
+
+
+
