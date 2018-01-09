@@ -1,0 +1,6 @@
+完善thriftManager组件，并完成与java端的对接
+完成thrift抽象类（使用单实例模式）
+修改thrift生成php代码的命名空间前缀为“thriftgen”
+
+！重新定义Query
+！实现TActiveRecord
