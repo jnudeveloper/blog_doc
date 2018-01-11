@@ -3,4 +3,6 @@
 修改thrift生成php代码的命名空间前缀为“thriftgen”
 
 重新定义Query
-！实现TActiveRecord及其相关的抽象类
+实现Query及其相关的抽象类
+以PostService为例子条同java与php
+！需要一个service提供底层的查询接口（使得sum，cout等聚合函数可以执行）
