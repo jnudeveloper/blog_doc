@@ -6,3 +6,7 @@
 实现Query及其相关的抽象类
 以PostService为例子条同java与php
 ！需要一个service提供底层的查询接口（使得sum，cout等聚合函数可以执行）
+！学习spring
+！整合spring与thrift
+！代码结构分层（参考代码spring chapter 10）
+！考虑从rpc转向RESTful
