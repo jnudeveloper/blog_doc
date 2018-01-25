@@ -5,8 +5,13 @@
 重新定义Query
 实现Query及其相关的抽象类
 以PostService为例子条同java与php
-！需要一个service提供底层的查询接口（使得sum，cout等聚合函数可以执行）
-！学习spring
-！整合spring与thrift(http://blog.csdn.net/zhu_tianwei/article/details/44004473)
-！代码结构分层（参考代码spring chapter 10）
+
+学习spring
+整合spring与thrift(http://blog.csdn.net/zhu_tianwei/article/details/44004473),并进一步整合mybatis
+代码结构分层（参考代码spring chapter 10）,建立基本的应用框架
+
+！整合java的日志（aop？）
+！php端的数据与restful的结合
+
 ！考虑从rpc转向RESTful
+！需要一个service提供底层的查询接口（使得sum，cout等聚合函数可以执行）
